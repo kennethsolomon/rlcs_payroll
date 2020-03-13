@@ -4,6 +4,7 @@ class Employee
 
     private $con;
     private $errorArray = array();
+    private $successArray = array();
 
     public function __construct($con)
     {
@@ -34,7 +35,7 @@ class Employee
         $query->bindParam(":add", $address);
         $query->bindParam(":prj", $project);
         $query->bindParam(":rate", $rate);
-
+        array_push($this->successArray, Constants::$employeeAddedSuccessfully);
         return $query->execute();
     }
 
@@ -148,6 +149,14 @@ class Employee
             return "<span class='errorMessage'>$error</span>";
         }
     }
+
+    public function getSuccess($success)
+    {
+        if (in_array($success, $this->successArray)) {
+            return "<span class='successMessage'>$success</span>";
+        }
+    }
+
     public function success($message)
     {
         $message = "
