@@ -16,8 +16,8 @@ if (isset($_POST['searchText'])) {
     }
 }
 
-//Save Patient Info
-if (isset($_POST['save'])) {
+//Add Employee
+if (isset($_POST['addEmployee'])) {
 
     $empId = $_POST['empId'];
     $lastName = $_POST['lastName'];
@@ -109,3 +109,74 @@ if (isset($_POST['save'])) {
 //   	  </div>';
 // }
 // $comments .= '</div>';
+
+if (isset($_POST['updatePatientBtn'])) {
+    $empId = $_POST['empId'];
+    $lastName = $_POST['lastName'];
+    $firstName = $_POST['firstName'];
+    $middleName = $_POST['middleName'];
+    $address = $_POST['address'];
+    $project = $_POST['project'];
+    $rate = $_POST['rate'];
+
+    $sql = "UPDATE employee SET 
+      lastName='{$lastName}', 
+      firstName='{$firstName}', 
+      middleName='{$middleName}', 
+      ward='{$ward}' 
+      WHERE uId='$pId'";
+    if (mysqli_query($conn, $sql)) {
+        $sql2 = "UPDATE reports SET 
+        ward='{$ward}' 
+        WHERE pId='$pId'";
+
+        if (mysqli_query($conn, $sql2)) {
+            echo "
+            <div class='card-header'>
+            <strong>Employee Info</strong>
+            </div>
+            <div class='card-body'>
+                    <div class='row'>
+                        <div class='col'>
+                            <input type='text' class='form-control' id='lastName' placeholder='Last name' value='$lastName'>
+                        </div>
+                        <div class='col'>
+                            <input type='text' class='form-control' id='firstName' placeholder='First name' value='$firstName'>
+                        </div>
+                        <div class='col'>
+                            <input type='text' class='form-control' id='middleName' placeholder='Middle name' value='$middleName'>
+                        </div>
+                    </div><br>
+                    <div class='row'>
+                        <div class='col-md-4'>
+                            <input type='text' class='form-control' id='address' placeholder='Address' value='$address'>
+                        </div>
+                        <div class='col-md-4'>
+                            <input type='text' class='form-control' id='rate' placeholder='Rate' value='$rate'>
+                        </div>
+                        <div class='col-md-4'>
+                            <select class='form-control' id='project' name='project' required>
+                                <option>$project</option> ";
+            $queryProjects = 'SELECT * FROM project';
+            $resultProjects = mysqli_query($conn, $queryProjects);
+            if (mysqli_num_rows($resultProjects) > 0) {
+                while ($row = mysqli_fetch_assoc($resultProjects)) {
+                    $projects = $row['projects'];
+                    echo "<option value='$projects'>$projects</option>";
+                }
+            }
+            echo "
+                            </select>
+                        </div>
+                    </div>
+                <br>
+                <button class='btn btn-primary' type='button' id='updateEmployeeBtn'>Update</button>
+            </div>
+            ";
+            header('Location: searchList.php?uId=' . $pId . '&status=newUpdate');
+        }
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+    exit();
+}

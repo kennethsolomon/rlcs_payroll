@@ -56,7 +56,7 @@ $(document).ready(function() {
         url: "includes/server.php",
         type: "POST",
         data: {
-          save: 1,
+          addEmployee: 1,
           empId: empId,
           lastName: lastName,
           firstName: firstName,
@@ -115,5 +115,37 @@ $(document).ready(function() {
     $("#comment").val(comment);
     $("#submit_btn").hide();
     $("#update_btn").show();
+  });
+});
+
+// Employee Info Page
+$(document).ready(function() {
+  // save comment to database
+  $(document).on("click", "#updateEmployeeBtn", function() {
+    var empId = generateEmpId;
+    var lastName = $("#lastName").val();
+    var firstName = $("#firstName").val();
+    var middleName = $("#middleName").val();
+    var address = $("#address").val();
+    var project = $("#project").val();
+    var rate = $("#rate").val();
+
+    $.ajax({
+      url: "includes/server.php",
+      type: "POST",
+      data: {
+        save: 1,
+        empId: empId,
+        lastName: lastName,
+        firstName: firstName,
+        middleName: middleName,
+        address: address,
+        project: project,
+        rate: rate
+      },
+      success: function(response) {
+        $("#display_area").append(response);
+      }
+    });
   });
 });

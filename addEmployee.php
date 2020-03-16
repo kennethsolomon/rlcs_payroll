@@ -66,8 +66,6 @@ include_once 'includes/components/header.php';
                             }
                             ?>
                         </select>
-
-
                     </div>
                 </div>
                 <div class="col-md-4">
