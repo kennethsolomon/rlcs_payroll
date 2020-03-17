@@ -2,10 +2,10 @@
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 15, 2020 at 06:50 AM
--- Server version: 10.4.12-MariaDB
--- PHP Version: 7.4.3
+-- Host: 127.0.0.1
+-- Generation Time: Mar 17, 2020 at 03:21 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -53,6 +53,18 @@ CREATE TABLE `employee` (
   `project` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `empId`, `lastName`, `firstName`, `middleName`, `address`, `rate`, `project`) VALUES
+(50, 'k7qyx5fcz0o4hvqri3j', 's', 's', 's', 's', 0, '23'),
+(51, 'k7qz7qg0ihqbyvr9t2q', 'd', 'd', 'd', 'd', 0, ''),
+(52, 'k7qz8g2ha4laby5vb79', 'w', 'w', 'w', 'w', 0, '23'),
+(53, 'k7qzcw2gqaxdvj7ogyg', 'x', 'x', 'x', 's', 23, 'RLCS MAIN'),
+(54, 'k7tzvi83lyobs6dzd8d', 'Jason', 'James', 'Jeje', 'Guinlajon', 222, 'GUINLAJON'),
+(55, 'k7u65t1oc3jkkxomg1v', 'sdkj', 'kasjd', 'kasks', '123', 2323, 'GUINLAJON');
+
 -- --------------------------------------------------------
 
 --
@@ -70,8 +82,7 @@ CREATE TABLE `project` (
 
 INSERT INTO `project` (`id`, `projects`) VALUES
 (1, 'RLCS MAIN'),
-(2, 'GUINLAJON'),
-(3, 'SEABREEZE');
+(2, 'GUINLAJON');
 
 -- --------------------------------------------------------
 
@@ -131,13 +142,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
