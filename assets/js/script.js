@@ -56,7 +56,7 @@ $(document).ready(function() {
         url: "includes/server.php",
         type: "POST",
         data: {
-          save: 1,
+          addEmployee: 1,
           empId: empId,
           lastName: lastName,
           firstName: firstName,
@@ -117,3 +117,28 @@ $(document).ready(function() {
     $("#update_btn").show();
   });
 });
+
+// // Employee Info Page
+// $(document).ready(function() {
+//   // save comment to database
+//   $(document).on("click", "#updateEmployeeBtn", function() {
+//     var empId = $("#empId").val();
+//     var lastName = $("#lastName").val();
+//     var firstName = $("#firstName").val();
+//     var middleName = $("#middleName").val();
+//     var address = $("#address").val();
+//     var project = $("#project").val();
+//     var rate = $("#rate").val();
+
+//     $.ajax({
+//       url: "includes/server.php",
+//       type: "POST",
+//       data: {
+//         updatePatientBtn: 1
+//       },
+//       success: function(response) {
+//         $("#display_area").html(response);
+//       }
+//     });
+//   });
+// });

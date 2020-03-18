@@ -16,8 +16,8 @@ if (isset($_POST['searchText'])) {
     }
 }
 
-//Save Patient Info
-if (isset($_POST['save'])) {
+//Add Employee
+if (isset($_POST['addEmployee'])) {
 
     $empId = $_POST['empId'];
     $lastName = $_POST['lastName'];
@@ -109,3 +109,31 @@ if (isset($_POST['save'])) {
 //   	  </div>';
 // }
 // $comments .= '</div>';
+
+if (isset($_POST['updateEmployeeBtn'])) {
+    $empId = $_POST['empId'];
+    $lastName = $_POST['lastName'];
+    $firstName = $_POST['firstName'];
+    $middleName = $_POST['middleName'];
+    $address = $_POST['address'];
+    $project = $_POST['project'];
+    $rate = $_POST['rate'];
+
+    $sql = "UPDATE employee SET 
+      lastName='{$lastName}', 
+      firstName='{$firstName}', 
+      middleName='{$middleName}',
+      address='{$address}',
+      project='{$project}',
+      rate='{$rate}'
+      WHERE empId='{$empId}'";
+    if (mysqli_query($conn, $sql)) {
+        $_SESSION['message'] = 'Employee Update Successfully!';
+        $url = "../employeeInfo.php?empId=$empId&projects=$project";
+        $url = str_replace(PHP_EOL, '', $url);
+        header("Location: $url");
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+    exit();
+}
