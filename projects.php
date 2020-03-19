@@ -2,16 +2,16 @@
 
 <div class="container">
     <table class="table table-bordered">
-    <thead>
-        <tr>
-        
-        <th scope="col">Projects</th>
-        <th scope="col">View</th>
-     
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
+        <thead>
+            <tr>
+
+                <th scope="col">Projects</th>
+                <th scope="col">View</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php
             $sql = "SELECT * FROM project";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($result)) {
@@ -25,9 +25,9 @@
                 </tr>
                 ";
             }
-        ?>
-           
-    </tbody>
+            ?>
+
+        </tbody>
     </table>
 </div>
 

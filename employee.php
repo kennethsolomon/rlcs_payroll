@@ -25,7 +25,7 @@
                 <tr>
                     <th scope='row'>$lastName, $firstName $middleName</th>
                     <th class='center' scope='row'>
-                    <a href='employeeInfo.php?empId=$empId&projects=$project'><i class='fas fa-eye' style='font-size:23'></i></a>
+                    <a href='employeeInfo.php?empId=$empId&projects=$project&month=&year='><i class='fas fa-eye' style='font-size:23'></i></a>
                     </th>
                 </tr>
                 ";

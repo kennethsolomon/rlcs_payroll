@@ -1,6 +1,6 @@
 <?php include_once 'includes/components/header.php' ?>
 
-<div class="container">
+<div class="container" id="container">
 
     <?php
     $project = $_GET['projects'];
@@ -84,14 +84,99 @@
         </div>
     </div>
 
+    <div id="display_area" class="mt-5"></div>
+    <div class="row mt-3">
+
+        <div class="col-md-6">
+            <select class='form-control' id='month' name='month'>
+                <option value=""></option>
+                <option value="01">Janruary</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="year" class="form-control" id="year" placeholder="Year">
+        </div>
+        <div class="col-md-3">
+            <button type="submit" id="addMonthAndYear" name="addMonthAndYear" class="btn btn-primary">Update</button>
+        </div>
+    </div>
+
+    <table class=" border table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+            </tr>
+        </tbody>
+    </table>
+
 
 </div>
 
 <?php
-
-
-
-
-
-
 include_once 'includes/components/footer.php' ?>
+
+<script>
+    $(document).ready(function() {
+        $(document).on("click", "#addMonthAndYear", function() {
+            var month = $("#month").val();
+            var year = $("#year").val();
+
+            if (month == "" || year == "") {
+                const emptyFields =
+                    '<div id="alert_message" class="alert alert-danger text-center">' +
+                    "You need to fill all the fields!" +
+                    "</div>";
+                window.setTimeout(function() {
+                    $("#alert_message")
+                        .fadeTo(500, 0)
+                        .slideUp(500, function() {
+                            $(this).remove();
+                        });
+                }, 3000);
+                $("#display_area").append(emptyFields);
+            } else {
+                const updated =
+                    '<div id="alert_message" class="alert alert-success text-center">' +
+                    "You need to fill all the fields!" +
+                    "</div>";
+                window.setTimeout(function() {
+                    $("#alert_message")
+                        .fadeTo(500, 0)
+                        .slideUp(500, function() {
+                            $(this).remove();
+                        });
+                }, 3000);
+                $("#display_area").append(updated);
+                window.history.pushState('', '', 'employeeInfo.php?empId=<?php echo $_GET['empId'] ?>&projects=<?php echo $_GET['projects'] ?>&month=' + month + '&year=' + year);
+            }
+
+        });
+
+    })
+</script>
