@@ -137,3 +137,135 @@ if (isset($_POST['updateEmployeeBtn'])) {
     }
     exit();
 }
+
+if (isset($_POST['getProjectList'])) {
+
+    $date = $_POST['date'];
+    $projectList = $_POST['projectList'];
+    $sql = "SELECT * FROM employee";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $comments = '
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Attendance</th>
+                </tr>
+            </thead>';
+        while ($row = mysqli_fetch_array($result)) {
+            $lastName = $row['lastName'];
+            $firstName = $row['firstName'];
+            $middleName = $row['middleName'];
+            $address = $row['address'];
+            $empId = $row['empId'];
+            $comments .= '
+                <tbody >
+                    <tr class="trID">
+                        <th scope="row">' . $lastName . ',' . $firstName . ' ' . $middleName . '</th>
+                        <th scope="row" class="eAddress">' . $address . '</th>';
+
+            $sql2 = "SELECT * FROM salary where empId = '$empId'";
+            $result2 = mysqli_query($conn, $sql2);
+            if (mysqli_num_rows($result2) > 0) {
+                $comments .= '<th scope="row"><input type="checkbox" class="form-control" id="' . $empId . '" checked></th>';
+            } else {
+                $comments .= '<th scope="row"><input type="checkbox" class="form-control" id="' . $empId . '"></th>';
+            }
+
+            $comments .= '  </tr></tbody>';
+        }
+        $comments .= '</table> ';
+
+        echo $comments;
+    } else {
+        echo 'No Result';
+    }
+}
+
+if (isset($_POST['checkedBox'])) {
+    $date = $_POST['date'];
+    $projectList = $_POST['projectList'];
+    $empId = $_POST['empId'];
+    $checkboxValue = $_POST['checkboxValue'];
+
+    $sql2 = "SELECT * FROM employee JOIN salary ON employee.empId =  salary.empId";
+    $result2 = mysqli_query($conn, $sql2);
+    if (mysqli_num_rows($result2) > 0) {
+        while ($row2 = mysqli_fetch_array($result2)) {
+            $rate = $row2['rate'];
+            $totalDaysWork = $row2['totalDaysWork'];
+        }
+        if ($checkboxValue == 1) {
+            $sql = "INSERT INTO salary (empId, date, rate, totalDaysWork) 
+                VALUES ('$empId', '$date', '$rate', '$totalDaysWork')";
+            if (mysqli_query($conn, $sql)) {
+                $insertSuccessful = '
+              <script>
+              window.setTimeout(function() {
+                  $("#alert_message").fadeTo(500, 0).slideUp(500, function(){
+                  $(this).remove(); 
+                  });
+              }, 3000);
+              </script>
+              <div id="alert_message" class="alert alert-success text-center">
+              Salary Added Successfuly!
+              </div>
+              ';
+                echo $insertSuccessful;
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+            exit();
+        } else if ($checkboxValue == 0) {
+            $sql = "DELETE FROM salary WHERE empId='$empId'";
+            if (mysqli_query($conn, $sql)) {
+                $deletedSuccessfuly = '
+                <script>
+                window.setTimeout(function() {
+                    $("#alert_message").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove(); 
+                    });
+                }, 3000);
+                </script>
+                <div id="alert_message" class="alert alert-danger text-center">
+                Salary Deleted Successfuly!
+                </div>
+                ';
+                echo $deletedSuccessfuly;
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+            exit();
+        }
+    } else {
+        $sql3 = "SELECT * FROM employee WHERE empId = '$empId'";
+        $result3 = mysqli_query($conn, $sql3);
+        while ($row3 = mysqli_fetch_array($result3)) {
+            $rate = $row3['rate'];
+        }
+        if ($checkboxValue == 1) {
+            $sql = "INSERT INTO salary (empId, date, rate, totalDaysWork) 
+            VALUES ('$empId', '$date', '$rate', 1)";
+            if (mysqli_query($conn, $sql)) {
+                $insertSuccessful = '
+          <script>
+          window.setTimeout(function() {
+              $("#alert_message").fadeTo(500, 0).slideUp(500, function(){
+              $(this).remove(); 
+              });
+          }, 3000);
+          </script>
+          <div id="alert_message" class="alert alert-success text-center">
+          Employee Added Successfuly!
+          </div>
+          ';
+                echo $insertSuccessful;
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+            exit();
+        }
+    }
+}

@@ -22,8 +22,8 @@ include_once 'includes/config.php';
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="#">Home</a>
             <a class="p-2 text-dark" href="projects.php">Projects</a>
-            <!-- <a class="p-2 text-dark" href="#">Projects</a>
-            <a class="p-2 text-dark" href="#">Pricing</a> -->
+            <a class="p-2 text-dark" href="salary.php">Salary</a>
+            <!-- <a class="p-2 text-dark" href="#">Pricing</a> -->
         </nav>
         <a class="btn btn-outline-primary" href="addEmployee.php">Add Employee</a>
     </div>

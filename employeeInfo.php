@@ -84,9 +84,8 @@
         </div>
     </div>
 
-    <div id="display_area" class="mt-5"></div>
+    <!-- <div id="display_area" class="mt-5"></div>
     <div class="row mt-3">
-
         <div class="col-md-6">
             <select class='form-control' id='month' name='month'>
                 <option value=""></option>
@@ -110,38 +109,14 @@
         <div class="col-md-3">
             <button type="submit" id="addMonthAndYear" name="addMonthAndYear" class="btn btn-primary">Update</button>
         </div>
-    </div>
-
-    <table class=" border table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Day</th>
-                <th scope="col">Salary</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-            </tr>
-        </tbody>
-    </table>
-
+    </div> -->
 
 </div>
 
 <?php
 include_once 'includes/components/footer.php' ?>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $(document).on("click", "#addMonthAndYear", function() {
             var month = $("#month").val();
@@ -178,5 +153,11 @@ include_once 'includes/components/footer.php' ?>
 
         });
 
+        $(document).on("click", ".rateDefaultInput", function() {
+            var id = $(this)[0].getAttribute("id");
+            $("#" + id).val("<?php echo $rate ?>");
+
+        });
+
     })
-</script>
+</script> -->

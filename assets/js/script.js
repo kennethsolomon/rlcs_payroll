@@ -142,3 +142,48 @@ $(document).ready(function() {
 //     });
 //   });
 // });
+
+// Employee Info Page
+$(document).ready(function() {
+  $("#projectList").change(function() {
+    const date = $("#date").val();
+    const projectList = $("#projectList").val();
+
+    if (date === "" || projectList === "") {
+      alert("Please input a valid data!");
+    } else {
+      $.ajax({
+        url: "includes/server.php",
+        type: "POST",
+        data: {
+          getProjectList: 1,
+          date: date,
+          projectList: projectList
+        },
+        success: function(response) {
+          $("#displayListOfEmployee").html(response);
+        }
+      });
+    }
+  });
+  // $(document).on("click", "#updateEmployeeBtn", function() {
+  //   var empId = $("#empId").val();
+  //   var lastName = $("#lastName").val();
+  //   var firstName = $("#firstName").val();
+  //   var middleName = $("#middleName").val();
+  //   var address = $("#address").val();
+  //   var project = $("#project").val();
+  //   var rate = $("#rate").val();
+
+  //   $.ajax({
+  //     url: "includes/server.php",
+  //     type: "POST",
+  //     data: {
+  //       updatePatientBtn: 1
+  //     },
+  //     success: function(response) {
+  //       $("#display_area").html(response);
+  //     }
+  //   });
+  // });
+});
